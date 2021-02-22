@@ -7,6 +7,11 @@ import { PlusOutlined, MinusOutlined } from '@ant-design/icons'
 
 const Stepper = ({ increment, decrement, onStepperChange }) => {
 
+  const getColor = (value) => {
+    if (value > 10) return 'orange'
+    if (value > 100) return 'red'
+  }
+
 
   return (
     <div className='stepper'>
@@ -14,7 +19,7 @@ const Stepper = ({ increment, decrement, onStepperChange }) => {
           <MinusOutlined />
         </Button>
       <InputNumber 
-        className='stepper-input'
+        className={`stepper-input ${getColor}`}
         min={0} 
         max={100} 
         defaultValue={1}
