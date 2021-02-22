@@ -15,7 +15,7 @@ const Stepper = ({ increment, decrement, onStepperChange }) => {
   }
 
   const getColor = (inputValue) => {
-    if(inputValue > 10 && inputValue < 100) setInputColor('orange')
+    if(inputValue > 10 && inputValue < 101) setInputColor('orange')
     else if(inputValue > 100) setInputColor('red')
     else setInputColor('black')
   }
