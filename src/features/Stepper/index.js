@@ -23,16 +23,17 @@ const Stepper = ({ increment, decrement, onStepperChange }) => {
 
   return (
     <div className='stepper'>
-      <Button onClick={decrement} className='stepper-button' size='large'>
+      <Button onClick={decrement} className='stepper-button' size='large' label='minus'>
           <MinusOutlined />
         </Button>
       <InputNumber 
         className={`stepper-input ${inputColor}`}
         min={0}  
-        defaultValue={1}
+        max={1000}
+        defaultValue={0}
         onChange={(value) => handleStepperChange(value)}
       />
-        <Button onClick={increment} className='stepper-button' size='large'>
+        <Button onClick={increment} className='stepper-button' size='large' label='plus'>
           <PlusOutlined />
         </Button>
     </div>
