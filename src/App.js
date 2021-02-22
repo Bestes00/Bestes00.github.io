@@ -4,22 +4,26 @@ import Display from '../src/features/Display'
 import Stepper from '../src/features/Stepper'
 
 
-class App extends Component{
-  state={
+class App extends Component {
+  state = {
     currentNumber: 0,
     currentStepper: 1
   }
 
   increaseCurrentNumber = () => {
-    this.setState((state) => {
-      return { currentNumber: state.currentNumber + state.currentStepper }
-    })
+    if (this.state.currentNumber + this.state.currentStepper <= 1000) {
+      this.setState((state) => {
+        return { currentNumber: state.currentNumber + state.currentStepper }
+      })
+    }
   }
 
   decreaseCurrentNumber = () => {
-    this.setState((state) => {
-      return { currentNumber: state.currentNumber - state.currentStepper }
-    })
+    if (this.state.currentNumber - this.state.currentStepper >= -1000) {
+      this.setState((state) => {
+        return { currentNumber: state.currentNumber - state.currentStepper }
+      })
+    }
   }
 
   handleStepperChange = (data) => {
@@ -29,10 +33,10 @@ class App extends Component{
   render() {
     return (
       <div>
-        <Display 
-          value={this.state.currentNumber} 
+        <Display
+          value={this.state.currentNumber}
         />
-        <Stepper 
+        <Stepper
           value={this.state.currentStepper}
           onStepperChange={this.handleStepperChange}
           increment={this.increaseCurrentNumber}
