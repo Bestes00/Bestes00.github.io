@@ -2,17 +2,29 @@
   display: flex;
   justify-content: center;
   &-input{
-    color: 'orange'!important
+    color: black;
   }
   &-button{
     margin: 0 60px;
   }
-}
 
-.orange{
-  color: 'orange';
-}
+  // .ant-input-number-input{
+  //   color: black;
+  // }
 
-.red{
-  color: 'red';
+  
+  .orange{
+    .ant-input-number-input-wrap {
+      .ant-input-number-input {
+        color: orange;
+      }
+    }
+  }
+  .red{
+    .ant-input-number-input-wrap {
+      .ant-input-number-input {
+        color: red;
+      }
+    }
+  }
 }
