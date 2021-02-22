@@ -7,7 +7,7 @@ import Stepper from '../src/features/Stepper'
 class App extends Component {
   state = {
     currentNumber: 0,
-    currentStepper: 1
+    currentStepper: 0
   }
 
   increaseCurrentNumber = () => {
