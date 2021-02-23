@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import Display from '../src/features/Display'
 import Stepper from '../src/features/Stepper'
-
 
 class App extends Component {
   state = {
@@ -17,7 +16,7 @@ class App extends Component {
       })
     }
   }
-
+  
   decreaseCurrentNumber = () => {
     if (this.state.currentNumber - this.state.currentStepper >= -1000) {
       this.setState((state) => {

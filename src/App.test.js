@@ -1,30 +1,64 @@
-import React from 'react'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import App from './App'
 
 const setup = () => {
-  const utils = render(<App />)
+  const { container } = render(<App />)
   const display = screen.getByRole('heading')
   const stepper = screen.getByRole('spinbutton')
-  const add = screen.getByLabelText('plus')
-  const subtract = screen.getByLabelText('minus')
-    return {
-      display, 
-      stepper, 
-      add,
-      subtract, 
-      ...utils
-    }
+  const add = screen.getByRole('button', { name: 'plus' })
+  const subtract = screen.getByRole('button', { name: 'minus' })
+  const increaseStepper = screen.getByRole('button', { name: 'Increase Value' })
+  const decreaseStepper = screen.getByRole('button', { name: 'Decrease Value' })
+  return {
+    display, 
+    stepper, 
+    add,
+    subtract,
+    increaseStepper,
+    decreaseStepper,
+    container
+  }
 }
 
-// describe('App Renders', () => {
-//   test('renders App component', () => {
-//     setup()
-//     // screen.debug()
-//   })
-// })
+describe('Check Render', () => {
+  test('Checks app is rendered to DOM', () => {
+    const { container } = setup()
+    expect(container.firstChild).toBeInTheDocument()
+    screen.getByRole('')
+  })
+})
+
+describe('Initial values', () => {
+  test('Checks buttons to ensure there are no wrong intial values', () => {
+    const { display, add, subtract } = setup()
+    userEvent.click(add)
+    expect(display).toHaveTextContent('0')
+    userEvent.click(subtract) 
+    expect(display).toHaveTextContent('0')
+  })
+})
+
+describe('Stepper Values', () => {
+  test('Changes stepper values accordingly', () => {
+    const { increaseStepper, decreaseStepper, stepper } = setup()
+    expect(stepper.value).toBe('0')
+    userEvent.click(increaseStepper)
+    expect(stepper.value).toBe('1')
+    userEvent.click(increaseStepper)
+    userEvent.click(increaseStepper)
+    userEvent.click(increaseStepper)
+    expect(stepper.value).toBe('4')
+    userEvent.click(decreaseStepper)
+    userEvent.click(decreaseStepper)
+    userEvent.click(decreaseStepper)
+    userEvent.click(decreaseStepper)
+    expect(stepper.value).toBe('0')
+    userEvent.click(decreaseStepper)
+    expect(stepper.value).toBe('0')
+  })
+})
 
 // checks that pressing the + button adds value
 describe('+', () => {
@@ -42,7 +76,7 @@ describe('+', () => {
 describe('-', () => {
   test('- press decreases by stepper amount', () => {
     const { stepper, display, subtract } = setup()
-
+    
     expect(stepper.value).toBe('0')
     userEvent.type(stepper, '5')
     userEvent.click(subtract)
@@ -67,7 +101,7 @@ describe('amounts', () => {
     userEvent.type(stepper, '560')
     userEvent.click(add)
     expect(display).toHaveTextContent('520')
-    })
+  })
 })
 
 describe('colors', () => {
